@@ -30,6 +30,6 @@ int main(int argc, char *argv[] )
       MPI_Send(value, 100, MPI_INT, rank+1, 20, MPI_COMM_WORLD );
   }
 
-  MPI_Finalize( );
+  MPI_Finalize();
   return 0;
 }
