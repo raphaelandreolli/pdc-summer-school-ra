@@ -19,15 +19,15 @@ int main(int argc, char *argv[] )
     printf( "Process %d sending %d\n", rank, value );
     //Insert MPI command to send value to the next rank
     // MPI_Send (buf, count, datatype, dest, tag, comm)
-    MPI_Send(value, 100, MPI_INT, rank+1, 20, MPI_COMM_WORLD);
+    MPI_Send(&value, 1, MPI_INT, rank+1, 20, MPI_COMM_WORLD);
   } else {
     //Insert MPI command to receive value from the previous rank
     // MPI_Recv (buf, count, datatype, source, tag, comm, status)
-    MPI_Recv (value, 100, MPI_INT, rank-1, 20, MPI_COMM_WORLD, &status);
+    MPI_Recv (&value, 1, MPI_INT, rank-1, 20, MPI_COMM_WORLD, &status);
     printf( "Process %d got %d\n", rank, value );
     if (rank < size - 1)
       //Insert MPI command to send value to the next rank
-      MPI_Send(value, 100, MPI_INT, rank+1, 20, MPI_COMM_WORLD );
+      MPI_Send(&value, 1, MPI_INT, rank+1, 20, MPI_COMM_WORLD );
   }
 
   MPI_Finalize();
